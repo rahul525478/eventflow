@@ -20,6 +20,12 @@ app.use(passport.initialize());
 // Routes
 app.use('/api', apiRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Export app for Vercel
+module.exports = app;
+
+// Only start server if running directly
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}

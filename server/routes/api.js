@@ -36,6 +36,16 @@ router.get('/auth/google/callback',
     }
 );
 
+// Event Routes
+router.get('/events', eventController.getEvents);
+router.get('/events/:id', eventController.getEventById);
+router.post('/events', verifyToken, upload.single('image'), eventController.createEvent);
+router.delete('/events/:id', verifyToken, eventController.deleteEvent);
+
+// AI Routes
+router.post('/ai/generate', verifyToken, aiController.generateEventDescription);
+router.post('/chat', verifyToken, aiController.chatWithAI);
+
 // Report Routes
 router.get('/reports/:type', verifyToken, reportController.getReportData);
 

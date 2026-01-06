@@ -36,6 +36,8 @@ exports.getEventById = (req, res) => {
 
 // Create new event
 exports.createEvent = (req, res) => {
+    console.log("createEvent called. Body:", req.body);
+    console.log("createEvent File:", req.file);
     try {
         const { title, date, location, price, description, ...otherData } = req.body;
 

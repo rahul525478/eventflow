@@ -2,8 +2,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, X, MessageSquare, User, Bot } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Chatbot = () => {
+    const { token } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { role: 'assistant', content: "Hi! I'm your EventFlow AI assistant. How can I help you today?" }
@@ -39,7 +41,10 @@ const Chatbot = () => {
 
             const res = await fetch('http://localhost:5000/api/chat', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({ message: userMessage.content, history })
             });
             const data = await res.json();
