@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Editor directories
+.idea/
+.vscode/
