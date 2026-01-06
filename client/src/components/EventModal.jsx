@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Upload, Calendar, MapPin, DollarSign, Loader2, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import Button from './ui/Button';
+import API_URL from '../apiConfig';
 
 const EventModal = ({ isOpen, onClose, onEventCreated }) => {
     const { token } = useAuth();
@@ -44,7 +45,7 @@ const EventModal = ({ isOpen, onClose, onEventCreated }) => {
 
         setAiLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/ai/generate', {
+            const res = await fetch(`${API_URL}/ai/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ const EventModal = ({ isOpen, onClose, onEventCreated }) => {
         }
 
         try {
-            const res = await fetch('http://localhost:5000/api/events', {
+            const res = await fetch(`${API_URL}/events`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

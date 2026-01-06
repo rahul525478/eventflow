@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Bell, Shield, Lock, CreditCard, Mail, Phone, Camera, HelpCircle } from 'lucide-react';
+import API_URL from '../apiConfig';
 import { motion } from 'framer-motion';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
@@ -47,7 +48,7 @@ const Settings = () => {
                                 <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-indigo-500 to-purple-500">
                                     {user?.image ? (
                                         <img
-                                            src={`http://localhost:5000${user.image}`}
+                                            src={`${API_URL}${user.image}`}
                                             alt="Profile"
                                             className="w-full h-full rounded-full object-cover border-4 border-white"
                                         />

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Loader2, Upload, X, Mail, Phone, ArrowRight, Lock, Smartphone, User } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import API_URL from '../apiConfig';
 import Button from '../components/ui/Button';
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
     const [step, setStep] = useState('form'); // 'form' or 'verify'
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation(); // Keep useLocation as it's used for Google callback
 
     // Form States
     const [formData, setFormData] = useState({
@@ -54,7 +56,7 @@ const Login = () => {
             // But let's stick to the current pattern.
             // We need to fetch the real user data to fill the context properly.
 
-            fetch('http://localhost:5000/api/auth/me', {
+            fetch(`${API_URL}/auth/me`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
                 .then(res => res.json())
@@ -99,7 +101,7 @@ const Login = () => {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('http://localhost:5000/api/auth/login', {
+            const res = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -137,9 +139,12 @@ const Login = () => {
         }
 
         try {
-            const res = await fetch('http://localhost:5000/api/auth/signup', {
+            const res = await fetch(`${API_URL}/auth/signup`, {
                 method: 'POST',
-                body: data // Fetch automatically sets Content-Type to multipart/form-data
+                headers: {
+                    // Remove Content-Type header to let browser set boundary for multipart
+                },
+                body: data
             });
             const result = await res.json();
             if (!res.ok) throw new Error(result.message || 'Signup failed');
@@ -162,7 +167,7 @@ const Login = () => {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('http://localhost:5000/api/auth/signup/verify', {
+            const res = await fetch(`${API_URL}/auth/signup/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -218,7 +223,7 @@ const Login = () => {
     };
 
     const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:5000/api/auth/google';
+        window.location.href = `${API_URL}/auth/google`;
     };
 
     return (

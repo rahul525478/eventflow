@@ -1,6 +1,8 @@
+```javascript
 import React from 'react';
-import { Search, Bell, User, ChevronDown, Menu } from 'lucide-react';
+import { User, LogOut, Settings, Calendar, Menu, X, ChevronDown, Bell } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import API_URL from '../apiConfig';
 
 const Header = ({ onMenuClick }) => {
     const { user } = useAuth();
@@ -36,15 +38,15 @@ const Header = ({ onMenuClick }) => {
                         <p className="text-sm font-medium text-slate-500 mt-1 capitalize">{user?.role || 'User'}</p>
                     </div>
                     <button className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-100 to-violet-100 border-2 border-white shadow-md flex items-center justify-center overflow-hidden hover:scale-105 transition-transform">
-                        {user?.image ? (
-                            <img
-                                src={`http://localhost:5000${user.image}`}
-                                alt="User"
-                                className="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <User className="w-5 h-5 text-indigo-500" />
-                        )}
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 p-0.5">
+                            {user?.image ? (
+                                <img src={`${ API_URL }${ user.image } `} alt="Profile" className="w-full h-full rounded-full object-cover border-2 border-white" />
+                            ) : (
+                                <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+                                    <span className="font-bold text-indigo-600 text-lg">{user?.firstName?.[0]}</span>
+                                </div>
+                            )}
+                        </div>
                     </button>
                 </div>
             </div>
@@ -53,3 +55,4 @@ const Header = ({ onMenuClick }) => {
 };
 
 export default Header;
+```

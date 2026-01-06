@@ -1,6 +1,8 @@
+```javascript
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Calendar, MapPin, ArrowLeft, Loader2, CheckCircle, Share2, Heart } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Calendar, MapPin, DollarSign, Share2, ArrowLeft, Clock, Shield, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import API_URL from '../apiConfig';
 import Button from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,8 +14,13 @@ const EventDetails = () => {
     const [registered, setRegistered] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/events/${id}`)
-            .then(res => res.json())
+        fetch(`${ API_URL } /events/${ id } `)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Event not found');
+                }
+                return res.json();
+            })
             .then(data => setEvent(data))
             .catch(err => console.error(err))
             .finally(() => setLoading(false));

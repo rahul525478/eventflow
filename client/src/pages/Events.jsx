@@ -4,6 +4,7 @@ import Button from '../components/ui/Button';
 import EventModal from '../components/EventModal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import API_URL from '../apiConfig';
 
 const Events = () => {
     const [events, setEvents] = useState([]);
@@ -12,7 +13,7 @@ const Events = () => {
 
     const fetchEvents = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/events');
+            const res = await fetch(`${API_URL}/events`);
             const data = await res.json();
             setEvents(data);
         } catch (error) {
