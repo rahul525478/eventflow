@@ -1,4 +1,4 @@
-```javascript
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, DollarSign, Share2, ArrowLeft, Clock, Shield, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
@@ -14,7 +14,7 @@ const EventDetails = () => {
     const [registered, setRegistered] = useState(false);
 
     useEffect(() => {
-        fetch(`${ API_URL } /events/${ id } `)
+        fetch(`${API_URL} /events/${id} `)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('Event not found');

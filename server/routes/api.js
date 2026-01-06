@@ -32,7 +32,10 @@ router.get('/auth/google/callback',
         // Successful authentication, redirect to frontend with token
         // Passport strategy should have returned the user
         const token = authController.generateToken(req.user);
-        res.redirect(`http://localhost:5173/login?token=${token}&role=${req.user.role}`);
+        const CLIENT_URL = process.env.CLIENT_URL || (process.env.NODE_ENV === 'production'
+            ? "https://eventflow-rho.vercel.app"
+            : "http://localhost:5173");
+        res.redirect(`${CLIENT_URL}/login?token=${token}&role=${req.user.role}`);
     }
 );
 

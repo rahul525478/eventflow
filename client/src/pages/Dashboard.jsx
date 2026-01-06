@@ -1,4 +1,4 @@
-```javascript
+
 import React, { useState } from 'react';
 import { Users, Calendar, TrendingUp, DollarSign, ArrowUpRight, ArrowDownRight, MoreHorizontal, Download, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -15,15 +15,15 @@ const StatCard = ({ title, value, change, icon: Icon, colorClass, delay, onClick
         className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20 hover:shadow-2xl hover:bg-white/20 transition-all duration-300 relative overflow-hidden group cursor-pointer"
     >
         {/* Glowing Gradient Border Effect */}
-        <div className={`absolute inset - 0 bg - gradient - to - br ${ colorClass } opacity - 0 group - hover: opacity - 10 transition - opacity duration - 500`} />
+        <div className={`absolute inset - 0 bg - gradient - to - br ${colorClass} opacity - 0 group - hover: opacity - 10 transition - opacity duration - 500`} />
 
-        <div className={`absolute top - 0 right - 0 w - 32 h - 32 bg - gradient - to - br ${ colorClass } opacity - 20 rounded - full blur - 3xl - mr - 10 - mt - 10 transition - transform duration - 700 group - hover: scale - 150`} />
+        <div className={`absolute top - 0 right - 0 w - 32 h - 32 bg - gradient - to - br ${colorClass} opacity - 20 rounded - full blur - 3xl - mr - 10 - mt - 10 transition - transform duration - 700 group - hover: scale - 150`} />
 
         <div className="flex justify-between items-start mb-4 relative z-10">
-            <div className={`p - 3.5 rounded - 2xl bg - gradient - to - br ${ colorClass } text - white shadow - lg shadow - black / 10 group - hover: scale - 110 transition - transform duration - 300 ring - 2 ring - white / 10`}>
+            <div className={`p - 3.5 rounded - 2xl bg - gradient - to - br ${colorClass} text - white shadow - lg shadow - black / 10 group - hover: scale - 110 transition - transform duration - 300 ring - 2 ring - white / 10`}>
                 <Icon className="w-6 h-6" />
             </div>
-            <div className={`flex items - center gap - 1 text - xs font - bold px - 2.5 py - 1 rounded - full border backdrop - blur - md ${ change >= 0 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20' } `}>
+            <div className={`flex items - center gap - 1 text - xs font - bold px - 2.5 py - 1 rounded - full border backdrop - blur - md ${change >= 0 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'} `}>
                 {change >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                 {Math.abs(change)}%
             </div>
@@ -42,12 +42,12 @@ const Dashboard = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [reportData, setReportData] = useState(null);
 
-    const displayName = user ? `${ user.firstName } ` : 'User';
+    const displayName = user ? `${user.firstName} ` : 'User';
 
     const fetchReport = async (type) => {
         try {
-            const res = await fetch(`${ API_URL } /reports/${ type } `, {
-                headers: { 'Authorization': `Bearer ${ token } ` }
+            const res = await fetch(`${API_URL} /reports/${type} `, {
+                headers: { 'Authorization': `Bearer ${token} ` }
             });
             const data = await res.json();
             if (res.ok) {
@@ -160,7 +160,7 @@ const Dashboard = () => {
                             <motion.div
                                 key={i}
                                 initial={{ height: 0 }}
-                                animate={{ height: `${ h }% ` }}
+                                animate={{ height: `${h}% ` }}
                                 transition={{ duration: 1, delay: 0.6 + (i * 0.05) }}
                                 className="w-full bg-indigo-500/20 group-hover:bg-indigo-500/40 rounded-t-lg relative transition-colors"
                             >

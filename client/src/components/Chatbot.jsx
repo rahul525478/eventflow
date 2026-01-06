@@ -1,4 +1,4 @@
-```
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, X, MessageSquare, User, Bot } from 'lucide-react';
@@ -40,11 +40,11 @@ const Chatbot = () => {
                 content: m.content
             }));
 
-            const res = await fetch(`${ API_URL } /ai/chat`, {
+            const res = await fetch(`${API_URL} /ai/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${ token } `
+                    'Authorization': `Bearer ${token} `
                 },
                 body: JSON.stringify({ message: userMessage.content, history })
             });
@@ -83,17 +83,16 @@ const Chatbot = () => {
                         {/* Messages */}
                         <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
                             {messages.map((msg, idx) => (
-                                <div key={idx} className={`flex gap - 3 ${ msg.role === 'user' ? 'justify-end' : 'justify-start' } `}>
+                                <div key={idx} className={`flex gap - 3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'} `}>
                                     {msg.role === 'assistant' && (
                                         <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 border border-indigo-500/30">
                                             <Bot className="w-4 h-4 text-indigo-400" />
                                         </div>
                                     )}
-                                    <div className={`p - 3 rounded - lg text - sm max - w - [80 %] leading - relaxed ${
-    msg.role === 'user'
-    ? 'bg-indigo-600 text-white rounded-br-none'
-    : 'bg-white/10 text-slate-200 border border-white/5 rounded-bl-none'
-} `}>
+                                    <div className={`p - 3 rounded - lg text - sm max - w - [80 %] leading - relaxed ${msg.role === 'user'
+                                            ? 'bg-indigo-600 text-white rounded-br-none'
+                                            : 'bg-white/10 text-slate-200 border border-white/5 rounded-bl-none'
+                                        } `}>
                                         {msg.content}
                                     </div>
                                     {msg.role === 'user' && (
